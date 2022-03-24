@@ -145,6 +145,7 @@ h6 {
   background-color: #40ff06;
 }
 .card-game-app__game-field {
+  min-width: 60%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -154,9 +155,14 @@ h6 {
 .card-game-app__card {
   position: relative;
   width: 20%;
-  height: 90px;
+  height: 120px;
   transition: all 0.8s ease 0s;
   transform-style: preserve-3d;
+}
+@media (max-width: 1023px) {
+  .card-game-app__card {
+    height: 90px;
+  }
 }
 .card-game-app__card-rotate {
   transform: rotateY(-180deg);
