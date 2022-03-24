@@ -152,12 +152,35 @@ h6 {
   margin: 20px 0 0 0;
 }
 .card-game-app__card {
+  position: relative;
+  width: 20%;
+  height: 90px;
+  transition: all 0.8s ease 0s;
+  transform-style: preserve-3d;
+}
+.card-game-app__card-rotate {
+  transform: rotateY(-180deg);
+}
+.card-game-app__card-front,
+.card-game-app__card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #40ff06;
-  width: 20%;
-  height: 90px;
   font-size: 30px;
   user-select: none;
+}
+.card-game-app__card-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+  background-color: #e379f1;
+  backface-visibility: hidden;
+}
+.card-game-app__card-back {
+  transform: rotateY(-180deg);
+  background-color: #40ff06;
 }
