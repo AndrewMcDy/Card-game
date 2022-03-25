@@ -4,13 +4,13 @@
     let variable = "0";
 
     function shuffleCards(array) {
-        // let m = array.length, t, i;
-        // while (m) {
-        //     i = Math.floor(Math.random() * m--);
-        //     t = array[m];
-        //     array[m] = array[i];
-        //     array[i] = t;
-        // }
+        let m = array.length, t, i;
+        while (m) {
+            i = Math.floor(Math.random() * m--);
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
         return array;
     }
 
@@ -33,16 +33,13 @@
         buttonsWrapper.classList.add('card-game-app__buttons-wrapper');
         startButton.classList.add('card-game-app__btn', 'card-game-app__btn_start');
         stopButton.classList.add('card-game-app__btn', 'card-game-app__btn_stop', 'disabled');
-
         startButton.textContent = "Start Game";
         stopButton.textContent = "Stop Game";
         score.textContent = "0";
-
         buttonsWrapper.append(startButton);
         buttonsWrapper.append(stopButton);
         appControls.append(score);
         appControls.append(buttonsWrapper);
-
         return {
             appControls,
             startButton,
@@ -68,10 +65,8 @@
             card.append(cardBack);
             appField.append(card);
         }
-
         return appField;
     }
-
     function createApp(container) {
 
         let gameTitle = createAppTitle();
