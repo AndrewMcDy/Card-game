@@ -122,7 +122,7 @@
             if (maxScore < currentScore) {
                 maxScore = currentScore;
                 localStorage.setItem('maxScore', maxScore);
-                gameControls.hiScore.textContent = maxScore;
+                gameControls.hiScore.textContent = `max: ${maxScore}`;
             };
         }
 
