@@ -126,6 +126,11 @@ h6 {
   align-items: center;
   gap: 10px;
 }
+@media (max-width: 380px) {
+  .card-game-app__controls {
+    flex-wrap: wrap;
+  }
+}
 .card-game-app__score,
 .card-game-app__hi-score {
   text-align: center;
@@ -137,7 +142,7 @@ h6 {
 }
 .card-game-app__hi-score {
   background-color: #e379f1;
-  width: 200px;
+  width: 140px;
 }
 .card-game-app__buttons-wrapper {
   display: flex;
