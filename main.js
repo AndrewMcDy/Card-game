@@ -102,16 +102,17 @@
                             }
                         })
                         variable = "0";
-                    } else {
-                        let cards = document.querySelectorAll('.card-game-app__card');
-                        console.log(cards);
-                        console.log(variable);
-                        cards.forEach(item => {
-                            if (item.textContent === variable) {
-                                item.classList.toggle('card-game-app__card-rotate');
-                            }                            
-                        });
-                        variable = "0";
+                    } else {                        
+                        setTimeout(function () {                            
+                            item.classList.remove('card-game-app__card-rotate');
+                            let cards = document.querySelectorAll('.card-game-app__card');
+                            cards.forEach(itemN => {
+                                if (itemN.textContent === variable) {
+                                    itemN.classList.remove('card-game-app__card-rotate');
+                                }
+                            });
+                            variable = "0";
+                        }, 1000)                        
                     }
                 }            
             }            
