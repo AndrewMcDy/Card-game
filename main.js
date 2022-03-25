@@ -2,6 +2,7 @@
 
     let anyArray = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
     let variable = "0";
+    let maxScore = localStorage.getItem('maxScore');
 
     function shuffleCards(array) {
         let m = array.length, t, i;
@@ -24,22 +25,27 @@
     function createAppControls() {
         let appControls = document.createElement('div');
         let score = document.createElement('div');
+        let hiScore = document.createElement('div');
         let buttonsWrapper = document.createElement('div');
         let resetButton = document.createElement('button');        
 
         appControls.classList.add('card-game-app__controls');
         score.classList.add('card-game-app__score');
+        hiScore.classList.add('card-game-app__hi-score');
         buttonsWrapper.classList.add('card-game-app__buttons-wrapper');        
         resetButton.classList.add('card-game-app__btn', 'card-game-app__btn_reset');
         resetButton.textContent = "Reset Game";
         score.textContent = '0';
+        hiScore.textContent = `max: ${maxScore || '0'}`;
         buttonsWrapper.append(resetButton);
         appControls.append(score);
+        appControls.append(hiScore);
         appControls.append(buttonsWrapper);
         return {
             appControls,
             resetButton,
             score,
+            hiScore,
         }
     }
 
@@ -112,6 +118,12 @@
                     }, 1000)
                 }
             }
+
+            if (maxScore < currentScore) {
+                maxScore = currentScore;
+                localStorage.setItem('maxScore', maxScore);
+                gameControls.hiScore.textContent = maxScore;
+            };
         }
 
         cards.forEach(item => {

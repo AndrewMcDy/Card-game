@@ -126,13 +126,18 @@ h6 {
   align-items: center;
   gap: 10px;
 }
-.card-game-app__score {
+.card-game-app__score,
+.card-game-app__hi-score {
   text-align: center;
   width: 100px;
   padding: 12px 20px;
   border-radius: 20px;
   font-size: 16px;
   box-shadow: 5px 5px 10px #000;
+}
+.card-game-app__hi-score {
+  background-color: #e379f1;
+  width: 200px;
 }
 .card-game-app__buttons-wrapper {
   display: flex;
