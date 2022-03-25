@@ -25,25 +25,21 @@
         let appControls = document.createElement('div');
         let score = document.createElement('div');
         let buttonsWrapper = document.createElement('div');
-        let startButton = document.createElement('button');
-        let stopButton = document.createElement('button');
+        let resetButton = document.createElement('button');        
 
         appControls.classList.add('card-game-app__controls');
         score.classList.add('card-game-app__score');
-        buttonsWrapper.classList.add('card-game-app__buttons-wrapper');
-        startButton.classList.add('card-game-app__btn', 'card-game-app__btn_start');
-        stopButton.classList.add('card-game-app__btn', 'card-game-app__btn_stop', 'disabled');
-        startButton.textContent = "Start Game";
-        stopButton.textContent = "Stop Game";
-        score.textContent = "0";
-        buttonsWrapper.append(startButton);
-        buttonsWrapper.append(stopButton);
+        buttonsWrapper.classList.add('card-game-app__buttons-wrapper');        
+        resetButton.classList.add('card-game-app__btn', 'card-game-app__btn_reset');
+        resetButton.textContent = "Reset Game";
+        score.textContent = '0';
+        buttonsWrapper.append(resetButton);
         appControls.append(score);
         appControls.append(buttonsWrapper);
         return {
             appControls,
-            startButton,
-            stopButton,
+            resetButton,
+            score,
         }
     }
 
@@ -67,11 +63,13 @@
         }
         return appField;
     }
+
     function createApp(container) {
 
         let gameTitle = createAppTitle();
         let gameControls = createAppControls();
         let gameField = createGameField(anyArray.length);
+        let currentScore = 0;
 
         container.append(gameTitle);
         container.append(gameControls.appControls);
@@ -80,27 +78,34 @@
         let cards = document.querySelectorAll(".card-game-app__card");
 
         function onClick(event) {
-            const item = event.target.closest(".card-game-app__card");
-            item.classList.toggle('card-game-app__card-rotate');
+            const clickedCard = event.target.closest(".card-game-app__card");
+            clickedCard.classList.toggle('card-game-app__card-rotate');
 
             if (variable === "0") {
-                variable = item.textContent;
+                variable = clickedCard.textContent;
             } else {
-                if (variable === item.textContent) {
+                if (variable === clickedCard.textContent) {
                     let cards = document.querySelectorAll('.card-game-app__card');
                     cards.forEach(card => {
                         if (card.textContent === variable) {
                             card.removeEventListener('click', onClick);
+                            currentScore += 100;
+                            gameControls.score.textContent = currentScore;
+                            setTimeout(function () {
+                                card.classList.add('strike');
+                            }, 1000);
                         }
                     })
                     variable = "0";
                 } else {
+                    currentScore -= 10;
+                            gameControls.score.textContent = currentScore;
                     setTimeout(function () {
-                        item.classList.remove('card-game-app__card-rotate');
+                        clickedCard.classList.remove('card-game-app__card-rotate');
                         let cards = document.querySelectorAll('.card-game-app__card');
-                        cards.forEach(itemN => {
-                            if (itemN.textContent === variable) {
-                                itemN.classList.remove('card-game-app__card-rotate');
+                        cards.forEach(anyCard => {
+                            if (anyCard.textContent === variable) {
+                                anyCard.classList.remove('card-game-app__card-rotate');
                             }
                         });
                         variable = "0";
@@ -109,14 +114,19 @@
             }
         }
 
-
         cards.forEach(item => {
-
             item.addEventListener('click', onClick);
+        });
+        
+        let reset = document.querySelector('.card-game-app__btn_reset');
+        let gameContainer = document.getElementById('card-game-app');
+        reset.addEventListener("click", () => {
+            gameContainer.innerHTML = '';
+            createApp(gameContainer);
         });
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {        
         createApp(document.getElementById('card-game-app'));
     });
 

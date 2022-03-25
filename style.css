@@ -77,7 +77,21 @@ h6 {
 /* Main styles */
 
 .disabled {
-  /* display: none; */
+  display: none;
+}
+.strike {
+  animation-duration: 1s;
+  animation-name: wow;
+}
+@keyframes wow {
+  50% {
+    transform: scale(1.5);
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: scale(1);
+    transform: rotateY(-180deg);
+  }
 }
 .card-game-app {
   font-family: "Luckiest Guy", cursive;
@@ -138,10 +152,7 @@ h6 {
   transform: translateY(-3px);
   background: none;
 }
-.card-game-app__btn_start {
-  background-color: #e379f1;
-}
-.card-game-app__btn_stop {
+.card-game-app__btn_reset {
   background-color: #40ff06;
 }
 .card-game-app__game-field {
